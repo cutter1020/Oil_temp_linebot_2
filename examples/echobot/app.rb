@@ -41,13 +41,14 @@ post '/callback' do
           #client.push_message("U97f1978ea01a7f94867501b8a66b6038", message)
           #client
          # Publish example
-          #MQTT::Client.connect('broker.emqx.io') do |c|
-            #c.publish('fr3oiltemp', event.message['text'])
-          #end
-          uri = URI('https://oil_2_flask-1-h5379095.deta.app/mqtt')
-          headers = { 'Content-Type': 'application/json' }
-          body = { topic: 'fr3oiltemp', msg: event.message['text'] }
-          response = Net::HTTP.post(uri, body.to_json, headers)
+          MQTT::Client.connect('broker.emqx.io') do |c|
+            a = c.publish('fr3oiltemp', event.message['text'])
+            a.to_s
+          end
+          #uri = URI('https://oil_2_flask-1-h5379095.deta.app/mqtt')
+          #headers = { 'Content-Type': 'application/json' }
+          #body = { topic: 'fr3oiltemp', msg: event.message['text'] }
+          #response = Net::HTTP.post(uri, body.to_json, headers)
         end
       end
     end
