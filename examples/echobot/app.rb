@@ -27,11 +27,9 @@ post '/callback' do
       #client.push_message("C13fa3b9ab7ddd59f4175f86712153d03", message)
       #client.push_message("C9c7c2c3dbf0d0b116c86bc6af8e6c73e", message)    #this
       MQTT::Client.connect('broker.emqx.io') do |c|
-            "test"
             rs = c.publish('fr3oiltemp', 'testfromspace')
+            rs.to_s
       end
-      "test2222"
-      puts 'your debug message'
   else
     events = client.parse_events_from(body)
     events.each do |event|
@@ -65,7 +63,5 @@ post '/callback' do
   #end
   
   #events = client.parse_events_from(body)
-  "OK"
-  "123456789"
-  rs.to_s
+  #"OK"
 end
