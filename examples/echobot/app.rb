@@ -43,8 +43,8 @@ post '/callback' do
          # Publish example
           MQTT::Client.connect('broker.emqx.io') do |c|
             a = c.publish('fr3oiltemp', event.message['text'])
-            a.to_s
           end
+          puts 'your debug message'
           #uri = URI('https://oil_2_flask-1-h5379095.deta.app/mqtt')
           #headers = { 'Content-Type': 'application/json' }
           #body = { topic: 'fr3oiltemp', msg: event.message['text'] }
