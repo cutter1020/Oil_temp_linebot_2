@@ -18,6 +18,7 @@ post '/callback' do
   request.body.rewind
   body = request.body.read
   json_body = JSON.parse(body)
+  ans = "no change"
 
   if json_body['ESP']
     message = {
@@ -28,7 +29,7 @@ post '/callback' do
       #client.push_message("C9c7c2c3dbf0d0b116c86bc6af8e6c73e", message)    #this
       MQTT::Client.connect('broker.emqx.io') do |c|
             rs = c.publish('fr3oiltemp', 'testfromspace')
-            rs.to_s
+            ans = rs.to_s
       end
   else
     events = client.parse_events_from(body)
@@ -64,4 +65,5 @@ post '/callback' do
   
   #events = client.parse_events_from(body)
   #"OK"
+  return ans
 end
